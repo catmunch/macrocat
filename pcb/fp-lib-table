@@ -2,4 +2,5 @@
   (lib (name "MX_Only")(type "KiCad")(uri "${KIPRJMOD}/MX_Alps_Hybrid/MX_Only.pretty")(options "")(descr ""))
   (lib (name "kbd")(type "KiCad")(uri "${KIPRJMOD}/kbd/kicad-footprints/kbd.pretty")(options "")(descr ""))
   (lib (name "nrfmicro")(type "KiCad")(uri "${KIPRJMOD}/joric-nrfmicro/nrfmicro.pretty")(options "")(descr ""))
+  (lib (name "macrocat")(type "KiCad")(uri "${KIPRJMOD}/macrocat.pretty")(options "")(descr ""))
 )
