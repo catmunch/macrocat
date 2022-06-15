@@ -2662,7 +2662,7 @@
   (symbol (lib_id "Device:RotaryEncoder_Switch") (at 124.46 100.33 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 7ce1fa23-e6c8-4f4d-a700-97b0bc833646)
-    (property "Reference" "SW2" (id 0) (at 124.46 90.17 0))
+    (property "Reference" "KNOB1" (id 0) (at 124.46 90.17 0))
     (property "Value" "RotaryEncoder_Switch" (id 1) (at 124.46 92.71 0))
     (property "Footprint" "Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm" (id 2) (at 120.65 96.266 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -2801,7 +2801,7 @@
   (symbol (lib_id "Switch:SW_Push") (at 40.64 36.83 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 9522c7ba-7f5c-4bf1-bcc9-9822f7337371)
-    (property "Reference" "SW1" (id 0) (at 40.64 29.21 0))
+    (property "Reference" "RESET1" (id 0) (at 40.64 29.21 0))
     (property "Value" "SW_Push" (id 1) (at 40.64 31.75 0))
     (property "Footprint" "Button_Switch_SMD:SW_DIP_SPSTx01_Slide_6.7x4.1mm_W6.73mm_P2.54mm_LowProfile_JPin" (id 2) (at 40.64 31.75 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -3061,8 +3061,8 @@
   (symbol (lib_id "Device:Crystal_GND24_Small") (at 38.1 44.45 90) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid de1b2933-e9ed-4629-ac8a-93e96f4f2a1f)
-    (property "Reference" "Y1" (id 0) (at 52.07 39.751 90))
-    (property "Value" "Crystal_GND24_Small" (id 1) (at 52.07 42.291 90))
+    (property "Reference" "Y1" (id 0) (at 43.18 39.751 90))
+    (property "Value" "16M" (id 1) (at 43.18 42.291 90))
     (property "Footprint" "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm" (id 2) (at 38.1 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
@@ -3160,7 +3160,7 @@
     (in_bom yes) (on_board yes)
     (uuid eb46497f-7da4-4d09-b0bc-ff28c911e659)
     (property "Reference" "J1" (id 0) (at 132.2578 26.4922 0))
-    (property "Value" "USB-C USB 2.0 MC-372" (id 1) (at 132.2578 28.8036 0))
+    (property "Value" "USB-C Connector" (id 1) (at 132.2578 28.8036 0))
     (property "Footprint" "nrfmicro:USB-C_C168688" (id 2) (at 132.2578 31.115 0))
     (property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip" (id 3) (at 133.35 50.8 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -3402,7 +3402,10 @@
       (reference "F1") (unit 1) (value "500mA") (footprint "Fuse:Fuse_1206_3216Metric")
     )
     (path "/eb46497f-7da4-4d09-b0bc-ff28c911e659"
-      (reference "J1") (unit 1) (value "USB-C USB 2.0 MC-372") (footprint "nrfmicro:USB-C_C168688")
+      (reference "J1") (unit 1) (value "USB-C Connector") (footprint "nrfmicro:USB-C_C168688")
+    )
+    (path "/7ce1fa23-e6c8-4f4d-a700-97b0bc833646"
+      (reference "KNOB1") (unit 1) (value "RotaryEncoder_Switch") (footprint "Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm")
     )
     (path "/4dc965b4-2750-4e34-ac33-80b79bca93bb"
       (reference "MX1") (unit 1) (value "MX-NoLED") (footprint "MX_Only:MXOnly-1U-Hotswap")
@@ -3474,16 +3477,13 @@
       (reference "R6") (unit 1) (value "5.1K") (footprint "Resistor_SMD:R_0805_2012Metric")
     )
     (path "/9522c7ba-7f5c-4bf1-bcc9-9822f7337371"
-      (reference "SW1") (unit 1) (value "SW_Push") (footprint "Button_Switch_SMD:SW_DIP_SPSTx01_Slide_6.7x4.1mm_W6.73mm_P2.54mm_LowProfile_JPin")
-    )
-    (path "/7ce1fa23-e6c8-4f4d-a700-97b0bc833646"
-      (reference "SW2") (unit 1) (value "RotaryEncoder_Switch") (footprint "Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm")
+      (reference "RESET1") (unit 1) (value "SW_Push") (footprint "Button_Switch_SMD:SW_DIP_SPSTx01_Slide_6.7x4.1mm_W6.73mm_P2.54mm_LowProfile_JPin")
     )
     (path "/30fb2a30-8a24-4b31-9ec0-7dad9c08990b"
       (reference "U1") (unit 1) (value "ATmega32U4-A") (footprint "Package_QFP:TQFP-44_10x10mm_P0.8mm")
     )
     (path "/de1b2933-e9ed-4629-ac8a-93e96f4f2a1f"
-      (reference "Y1") (unit 1) (value "Crystal_GND24_Small") (footprint "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm")
+      (reference "Y1") (unit 1) (value "16M") (footprint "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm")
     )
   )
 )
