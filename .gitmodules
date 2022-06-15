@@ -4,3 +4,5 @@
 [submodule "pcb/kbd"]
 	path = pcb/kbd
 	url = https://github.com/foostan/kbd
+[submodule ".\\MX_Alps_Hybrid\\"]
+	url = https://github.com/catmunch/MX_Alps_Hybrid.git
