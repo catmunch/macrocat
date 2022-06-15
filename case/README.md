@@ -7,7 +7,8 @@ The program used is Openscad.
 ## TODO
 - [ ] Add screw holes
 - [ ] Add extra spacing between key caps and side walls
-- [ ] Figure out right dimensions
+- [x] Figure out right dimensions
+- [ ] Add port for wire
 - [ ] Aesthetics
 	- [ ] Add in PCB outline
 	- [ ] Add switch outline
