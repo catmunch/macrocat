@@ -45,6 +45,8 @@ module draw_plate() {
 			translate([edge_thickness + side_clearance, edge_thickness + side_clearance, 0]) // Center plate to case
 			import("../plate/4x4 plate.svg");
 		}
+        
+        side_plate_screws();
 	}
 }
 
@@ -203,4 +205,30 @@ module bottom_screws() {
 		translate([total_width - edge_thickness/2, 2/3 * total_length, -0.1])
 			cylinder(screw_head_height, d=screw_head_width);
 	}
+}
+
+module side_plate_screws() {
+    translate([2/3 * total_width, edge_thickness/2, 0])
+        circle(screw_clearance / 2);
+
+    translate([1/3 * total_width, edge_thickness/2, 0])
+        circle(screw_clearance / 2);
+
+    translate([2/3 * total_width, total_length - edge_thickness/2, 0])
+        circle(screw_clearance / 2);
+
+    translate([1/3 * total_width, total_length - edge_thickness/2, 0])
+        circle(screw_clearance / 2);
+    
+    translate([edge_thickness/2, 1/3 * total_length, 0])
+        circle(screw_clearance / 2);
+
+    translate([edge_thickness/2, 2/3 * total_length, 0])
+        circle(screw_clearance / 2);
+
+    translate([total_width - edge_thickness/2, 1/3 * total_length, 0])
+        circle(screw_clearance / 2);
+
+    translate([total_width - edge_thickness/2, 2/3 * total_length, 0])
+        circle(screw_clearance / 2);
 }
