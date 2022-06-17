@@ -1,5 +1,5 @@
 // Display Mode:
-// preview, plate, bottom, top
+// preview, plate, bottom, top, null
 mode = "preview";
 
 // Variables (units in mm):
@@ -11,6 +11,9 @@ plate_thickness = 5;
 u = 19.05;
 $fn = 200; // for smooth circle
 plate_width = 4 * 19.05;
+plate_height = plate_width + 20;
+keycap_clearance = 2;
+side_clearance = 5;
 
 // M3 Screw height:
 screw_height = 12; // 4mm (bottom) + 6mm (side) + around 4mm (top) - 3mm screw head = 12mm   
@@ -26,7 +29,7 @@ screw_head_width = 6;
 // Draw plate
 module draw_plate() {
 	union() {
-		translate([edge_thickness, edge_thickness, 0]) // Center plate to case
+		translate([edge_thickness + side_clearance/2, edge_thickness + side_clearance/2, 0]) // Center plate to case
 		import("../plate/4x4 plate.svg");
 		side_draw_plate();
 	}
@@ -45,13 +48,19 @@ module plate() {
 
 // draws the bottom plate
 module bottom_draw_plate() {
-	minkowski() {
-		// center plate location
-		translate([edge_thickness, edge_thickness, 0])
-			square(plate_width);
+	translate([edge_thickness, edge_thickness, 0])
+	hull() {
+		translate([0, 0, 0])
+			circle(edge_thickness);
 
-		// rounded edge
-		circle(edge_thickness);
+		translate([plate_width + side_clearance, 0, 0])
+			circle(edge_thickness);
+
+		translate([0, plate_height + side_clearance, 0])
+			circle(edge_thickness);
+
+		translate([plate_width + side_clearance, plate_height + side_clearance, 0])
+			circle(edge_thickness);
 	}
 }
 
@@ -63,7 +72,7 @@ module side_draw_plate() {
 
 		// Cut out space for plate
 		translate([edge_thickness, edge_thickness, 0])
-			square(plate_width);
+			square([plate_width + side_clearance, plate_height + side_clearance]);
 	}
 }
 
@@ -88,7 +97,14 @@ module bottom_case() {
 
 // draws top case
 module top_draw_case() {
-	side_draw_plate();
+	difference() {
+		// Create bottom shape
+		bottom_draw_plate();
+
+		// Cut out space for keycaps
+		translate([edge_thickness + keycap_clearance/2, edge_thickness + keycap_clearance/2, 0])
+			square([plate_width + keycap_clearance, plate_height + keycap_clearance]);
+	}
 }
 
 // top case
@@ -112,4 +128,3 @@ if (mode == "preview") {
 } else {
 	echo("Syntax error!");
 }
-
