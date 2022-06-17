@@ -2,31 +2,22 @@
 // preview, plate, bottom, top
 mode = "preview";
 
-if (mode == "preview") {
-	bottom_case();
-	% plate();
-	top_case();
-} else if (mode == "plate") {
-	draw_plate();
-} else if (mode == "bottom") {
-	bottom_case();
-} else if (mode == "top") {
-	top_case();
-} else {
-	echo("Syntax error!");
-}
-
-// draw_plate();
-
 // Variables (units in mm):
-edge_thickness = 3;
-bottom_thickness = 2;
-side_height = 10;
+edge_thickness = 10; // 6mm hole for m3 screw
+bottom_thickness = 4;
+side_height = 6; // 2mm for pcb, 2mm for hotswap
+top_thickness = 7; // 6.6mm for height of top housing
+plate_thickness = 5;
 u = 19.05;
 $fn = 200; // for smooth circle
 plate_width = 4 * 19.05;
-plate_height = 5;
-top_thickness = 3;
+
+// M3 Screw height:
+screw_height = 12; // 4mm (bottom) + 6mm (side) + around 4mm (top) - 3mm screw head = 12mm   
+screw_clearance = 4; // 3.4mm clearance
+nut_clearance = 6; // nut is 5.6mm diameter
+screw_head_height = 3;
+screw_head_width = 6;
 
 //
 // Plate:
@@ -43,8 +34,8 @@ module draw_plate() {
 
 // Extrude Plate
 module plate() {
-	translate([0, 0, side_height])
-	linear_extrude(plate_height)
+	translate([0, 0, side_height + bottom_thickness])
+	linear_extrude(plate_thickness)
 		draw_plate();
 }
 
@@ -102,7 +93,23 @@ module top_draw_case() {
 
 // top case
 module top_case() {
-	translate([0, 0, side_height + plate_height])
+	translate([0, 0, side_height + plate_thickness + bottom_thickness])
 	linear_extrude(top_thickness)
 		top_draw_case();
 }
+
+// Rendering
+if (mode == "preview") {
+	bottom_case();
+	% plate();
+	top_case();
+} else if (mode == "plate") {
+	draw_plate();
+} else if (mode == "bottom") {
+	bottom_case();
+} else if (mode == "top") {
+	top_case();
+} else {
+	echo("Syntax error!");
+}
+
