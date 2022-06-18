@@ -24,6 +24,10 @@ inserts_width = 4; // 4.2mm diameter
 inserts_height = 4; // 4mm high insert
 inserts_hole_height = inserts_height*1.3; // 4mm high insert
 
+// Type C Cutout
+port_width = 15; 
+port_height = 10;
+
 // Calculations
 total_width  = plate_width + 2*side_clearance + 2*side_thickness;
 total_length = plate_length + 2*side_clearance + 2*side_thickness;
@@ -51,6 +55,7 @@ module draw_plate() {
 		}
         
         plate_screws();
+		plate_cutout();
 	}
 }
 
@@ -111,6 +116,7 @@ module bottom_case() {
 		}
 
 		bottom_screws();
+		bottom_case_cutout();
 	}
 }
 
@@ -265,4 +271,18 @@ module top_case_screws() {
 
 	translate([total_width - side_thickness/2, 2/3 * total_length, bottom_thickness + side_height + plate_thickness-0.1])
 		cylinder(inserts_hole_height, d=inserts_width);
+}
+
+// 
+// Type C port cut out
+//
+
+module bottom_case_cutout() {
+	translate([(total_width-port_width)/2, total_length-side_thickness-1, bottom_thickness + side_height - (port_height-2)/2])
+	cube([port_width, side_thickness+2, port_height]);
+}
+
+module plate_cutout() {
+	translate([(total_width-port_width)/2, total_length-side_thickness-1])
+	square([port_width, side_thickness+2]);
 }
