@@ -12,7 +12,7 @@ $fn              = 200; // for smooth circle
 plate_width      = 4 * 19.05;
 plate_length     = plate_width + 20;
 keycap_clearance = 2;
-side_clearance   = 2;
+side_clearance   = 3;
 
 // M2.5 Screw height:
 screw_height      = 14; // 4mm (bottom) + 6mm (side) + 5mm plate + around 4mm (top) - 3mm screw head = 14mm
