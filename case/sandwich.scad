@@ -278,7 +278,7 @@ module top_case_screws() {
 //
 
 module bottom_case_cutout() {
-	translate([(total_width-port_width)/2, total_length-side_thickness-1, bottom_thickness + side_height - (port_height-2)/2])
+	translate([(total_width-port_width)/2, total_length-side_thickness-1, bottom_thickness + side_height - (port_height)/2])
 	cube([port_width, side_thickness+2, port_height]);
 }
 
