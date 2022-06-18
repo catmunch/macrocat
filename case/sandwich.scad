@@ -3,7 +3,7 @@
 mode = "preview";
 
 // Variables (units in mm):
-edge_thickness   = 8; // 6mm hole for m2.5 screw head
+side_thickness   = 8; // 6mm hole for m2.5 screw head
 bottom_thickness = 5;
 side_height      = 6; // 2mm for pcb, 2mm for hotswap
 top_thickness    = 7; // 6.6mm for height of top housing
@@ -21,8 +21,8 @@ screw_head_height = 2;
 screw_head_width  = 6; // 5mm screw width
 
 // Calculations
-total_width  = plate_width + 2*side_clearance + 2*edge_thickness;
-total_length = plate_length + 2*side_clearance + 2*edge_thickness;
+total_width  = plate_width + 2*side_clearance + 2*side_thickness;
+total_length = plate_length + 2*side_clearance + 2*side_thickness;
 
 //
 // Plate:
@@ -32,21 +32,21 @@ total_length = plate_length + 2*side_clearance + 2*edge_thickness;
 module draw_plate() {
 	difference() {
 		union() {
-			translate([edge_thickness, edge_thickness])
+			translate([side_thickness, side_thickness])
 				square([plate_width + side_clearance*2, plate_width+side_clearance*2]);
 
 			side_draw_plate();
 		}
 
 		difference() {
-			translate([edge_thickness + side_clearance, edge_thickness + side_clearance])
+			translate([side_thickness + side_clearance, side_thickness + side_clearance])
 				square([plate_width, plate_width]);
 
-			translate([edge_thickness + side_clearance, edge_thickness + side_clearance, 0]) // Center plate to case
+			translate([side_thickness + side_clearance, side_thickness + side_clearance, 0]) // Center plate to case
 			import("../plate/4x4 plate.svg");
 		}
         
-        side_plate_screws();
+        plate_screws();
 	}
 }
 
@@ -63,19 +63,19 @@ module plate() {
 
 // draws the bottom plate
 module bottom_draw_plate() {
-	translate([edge_thickness, edge_thickness, 0])
+	translate([side_thickness, side_thickness, 0])
 	hull() {
 		translate([0, 0, 0])
-			circle(edge_thickness);
+			circle(side_thickness);
 
 		translate([plate_width + side_clearance*2, 0, 0])
-			circle(edge_thickness);
+			circle(side_thickness);
 
 		translate([0, plate_length + side_clearance*2, 0])
-			circle(edge_thickness);
+			circle(side_thickness);
 
 		translate([plate_width + side_clearance*2, plate_length + side_clearance*2, 0])
-			circle(edge_thickness);
+			circle(side_thickness);
 	}
 }
 
@@ -86,7 +86,7 @@ module side_draw_plate() {
 		bottom_draw_plate();
 
 		// Cut out space for plate
-		translate([edge_thickness, edge_thickness, 0])
+		translate([side_thickness, side_thickness, 0])
 			square([plate_width + side_clearance*2, plate_length + side_clearance*2]);
 	}
 }
@@ -121,7 +121,7 @@ module top_draw_case() {
 		bottom_draw_plate();
 
 		// Cut out space for keycaps
-		translate([edge_thickness + side_clearance - keycap_clearance, edge_thickness + side_clearance - keycap_clearance, 0])
+		translate([side_thickness + side_clearance - keycap_clearance, side_thickness + side_clearance - keycap_clearance, 0])
 			square([plate_width + keycap_clearance*2, plate_length + keycap_clearance*2]);
 	}
 }
@@ -156,79 +156,79 @@ if (mode == "preview") {
 module bottom_screws() {
 	union() {
 		// top
-		translate([2/3 * total_width, edge_thickness/2, 0])
+		translate([2/3 * total_width, side_thickness/2, 0])
 			cylinder(screw_height, d=screw_clearance);
 
-		translate([1/3 * total_width, edge_thickness/2, 0])
+		translate([1/3 * total_width, side_thickness/2, 0])
 			cylinder(screw_height, d=screw_clearance);
 
-		translate([2/3 * total_width, total_length - edge_thickness/2, 0])
+		translate([2/3 * total_width, total_length - side_thickness/2, 0])
 			cylinder(screw_height, d=screw_clearance);
 
-		translate([1/3 * total_width, total_length - edge_thickness/2, 0])
+		translate([1/3 * total_width, total_length - side_thickness/2, 0])
 			cylinder(screw_height, d=screw_clearance);
 
-		translate([2/3 * total_width, edge_thickness/2, -0.1])
+		translate([2/3 * total_width, side_thickness/2, -0.1])
 			cylinder(screw_head_height, d=screw_head_width);
 
-		translate([1/3 * total_width, edge_thickness/2, -0.1])
+		translate([1/3 * total_width, side_thickness/2, -0.1])
 			cylinder(screw_head_height, d=screw_head_width);
 
-		translate([2/3 * total_width, total_length - edge_thickness/2, -0.1])
+		translate([2/3 * total_width, total_length - side_thickness/2, -0.1])
 			cylinder(screw_head_height, d=screw_head_width);
 
-		translate([1/3 * total_width, total_length - edge_thickness/2, -0.1])
+		translate([1/3 * total_width, total_length - side_thickness/2, -0.1])
 			cylinder(screw_head_height, d=screw_head_width);
 
 		// side
-		translate([edge_thickness/2, 1/3 * total_length, 0])
+		translate([side_thickness/2, 1/3 * total_length, 0])
 			cylinder(screw_height, d=screw_clearance);
 
-		translate([edge_thickness/2, 2/3 * total_length, 0])
+		translate([side_thickness/2, 2/3 * total_length, 0])
 			cylinder(screw_height, d=screw_clearance);
 
-		translate([total_width - edge_thickness/2, 1/3 * total_length, 0])
+		translate([total_width - side_thickness/2, 1/3 * total_length, 0])
 			cylinder(screw_height, d=screw_clearance);
 
-		translate([total_width - edge_thickness/2, 2/3 * total_length, 0])
+		translate([total_width - side_thickness/2, 2/3 * total_length, 0])
 			cylinder(screw_height, d=screw_clearance);
 
-		translate([edge_thickness/2, 1/3 * total_length, -0.1])
+		translate([side_thickness/2, 1/3 * total_length, -0.1])
 			cylinder(screw_head_height, d=screw_head_width);
 
-		translate([edge_thickness/2, 2/3 * total_length, -0.1])
+		translate([side_thickness/2, 2/3 * total_length, -0.1])
 			cylinder(screw_head_height, d=screw_head_width);
 
-		translate([total_width - edge_thickness/2, 1/3 * total_length, -0.1])
+		translate([total_width - side_thickness/2, 1/3 * total_length, -0.1])
 			cylinder(screw_head_height, d=screw_head_width);
 
-		translate([total_width - edge_thickness/2, 2/3 * total_length, -0.1])
+		translate([total_width - side_thickness/2, 2/3 * total_length, -0.1])
 			cylinder(screw_head_height, d=screw_head_width);
 	}
 }
 
-module side_plate_screws() {
-    translate([2/3 * total_width, edge_thickness/2, 0])
+module plate_screws() {
+    translate([2/3 * total_width, side_thickness/2])
         circle(screw_clearance / 2);
 
-    translate([1/3 * total_width, edge_thickness/2, 0])
+    translate([1/3 * total_width, side_thickness/2])
         circle(screw_clearance / 2);
 
-    translate([2/3 * total_width, total_length - edge_thickness/2, 0])
+    translate([2/3 * total_width, total_length - side_thickness/2])
         circle(screw_clearance / 2);
 
-    translate([1/3 * total_width, total_length - edge_thickness/2, 0])
+    translate([1/3 * total_width, total_length - side_thickness/2])
         circle(screw_clearance / 2);
     
-    translate([edge_thickness/2, 1/3 * total_length, 0])
+    translate([side_thickness/2, 1/3 * total_length])
         circle(screw_clearance / 2);
 
-    translate([edge_thickness/2, 2/3 * total_length, 0])
+    translate([side_thickness/2, 2/3 * total_length])
         circle(screw_clearance / 2);
 
-    translate([total_width - edge_thickness/2, 1/3 * total_length, 0])
+    translate([total_width - side_thickness/2, 1/3 * total_length])
         circle(screw_clearance / 2);
 
-    translate([total_width - edge_thickness/2, 2/3 * total_length, 0])
+    translate([total_width - side_thickness/2, 2/3 * total_length])
         circle(screw_clearance / 2);
 }
