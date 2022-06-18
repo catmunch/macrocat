@@ -15,10 +15,14 @@ keycap_clearance = 2;
 side_clearance   = 5;
 
 // M2.5 Screw height:
-screw_height      = 12; // 4mm (bottom) + 6mm (side) + around 4mm (top) - 3mm screw head = 12mm
+screw_height      = 14; // 4mm (bottom) + 6mm (side) + 5mm plate + around 4mm (top) - 3mm screw head = 14mm
 screw_clearance   = 3; // 2.9mm clearance
-screw_head_height = 2;
+screw_head_height = 3;
 screw_head_width  = 6; // 5mm screw width
+
+inserts_width = 4; // 4.2mm diameter
+inserts_height = 4; // 4mm high insert
+inserts_hole_height = inserts_height*1.3; // 4mm high insert
 
 // Calculations
 total_width  = plate_width + 2*side_clearance + 2*side_thickness;
@@ -128,9 +132,13 @@ module top_draw_case() {
 
 // top case
 module top_case() {
-	translate([0, 0, side_height + plate_thickness + bottom_thickness])
-	linear_extrude(top_thickness)
-		top_draw_case();
+	difference() {
+		translate([0, 0, side_height + plate_thickness + bottom_thickness])
+		linear_extrude(top_thickness)
+			top_draw_case();
+
+		top_case_screws();
+	}
 }
 
 // Rendering
@@ -231,4 +239,30 @@ module plate_screws() {
 
     translate([total_width - side_thickness/2, 2/3 * total_length])
         circle(screw_clearance / 2);
+}
+
+module top_case_screws() {
+	translate([2/3 * total_width, side_thickness/2, bottom_thickness + side_height + plate_thickness-0.1])
+		cylinder(inserts_hole_height, d=inserts_width);
+
+	translate([1/3 * total_width, side_thickness/2, bottom_thickness + side_height + plate_thickness-0.1])
+		cylinder(inserts_hole_height, d=inserts_width);
+
+	translate([2/3 * total_width, total_length - side_thickness/2, bottom_thickness + side_height + plate_thickness-0.1])
+		cylinder(inserts_hole_height, d=inserts_width);
+
+	translate([1/3 * total_width, total_length - side_thickness/2, bottom_thickness + side_height + plate_thickness-0.1])
+		cylinder(inserts_hole_height, d=inserts_width);
+
+	translate([side_thickness/2, 1/3 * total_length, bottom_thickness + side_height + plate_thickness-0.1])
+		cylinder(inserts_hole_height, d=inserts_width);
+
+	translate([side_thickness/2, 2/3 * total_length, bottom_thickness + side_height + plate_thickness-0.1])
+		cylinder(inserts_hole_height, d=inserts_width);
+
+	translate([total_width - side_thickness/2, 1/3 * total_length, bottom_thickness + side_height + plate_thickness-0.1])
+		cylinder(inserts_hole_height, d=inserts_width);
+
+	translate([total_width - side_thickness/2, 2/3 * total_length, bottom_thickness + side_height + plate_thickness-0.1])
+		cylinder(inserts_hole_height, d=inserts_width);
 }
