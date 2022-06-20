@@ -1,12 +1,11 @@
-// Display Mode:
 // preview, plate, bottom, top, null
 mode = "preview";
 
 // Variables (units in mm):
-side_thickness   = 8; // 6mm hole for m2.5 screw head
+side_thickness   = 10; // 8mm hole for m3 screw head
 bottom_thickness = 5;
 side_height      = 6; // 2mm for pcb, 2mm for hotswap
-top_thickness    = 7; // 6.6mm for height of top housing
+top_thickness    = 6.6; // 6.6mm for height of top housing
 plate_thickness  = 5;
 $fn              = 200; // for smooth circle
 plate_width      = 4 * 19.05;
@@ -16,11 +15,11 @@ side_clearance   = 3;
 
 // M2.5 Screw height:
 screw_height      = 14; // 4mm (bottom) + 6mm (side) + 5mm plate + around 4mm (top) - 3mm screw head = 14mm
-screw_clearance   = 3; // 2.9mm clearance
-screw_head_height = 3;
-screw_head_width  = 6; // 5mm screw width
+screw_clearance   = 3.6; // 3.4mm clearance
+screw_head_height = 3; // 1mm screw head height
+screw_head_width  = 8; // 6mm screw head width
 
-inserts_width = 4; // 4.2mm diameter
+inserts_width = 4.8; // 5mm diameter
 inserts_height = 4; // 4mm high insert
 inserts_hole_height = inserts_height*1.3; // 4mm high insert
 
