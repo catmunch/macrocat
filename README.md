@@ -8,3 +8,4 @@ A cat like macro keyboard/numpad.
 - [ai03](https://wiki.ai03.com/books)
 - [Keyboard Layout Editor](http://www.keyboard-layout-editor.com/#/gists/0d682a6dd41d7de2ae32d8b280f85d39)
 - [ai03 Plate Generator](https://kbplate.ai03.com/)
+- [Keyswitch KiCAD Library](https://github.com/perigoso/keyswitch-kicad-library) Licensed in CC-BY-SA 4.0
