@@ -5,3 +5,11 @@ u = 19.05;
 margins = 1;
 
 include <plate.scad>
+include <side profile.scad>
+include <top.scad>
+
+% linear_extrude(plate_thickness)
+	drawPlate();
+
+translate([0, 0, plate_thickness])
+	topSides();
