@@ -5,14 +5,16 @@ top_height = 8;
 
 keycap_margins = 1.5*margins;
 
+side_width_with_margins = side_width + margins;
+
 // Draws the side profile
 module drawTopSideProfile() {
-	polygon([[0,0], [0, top_height], [top_notch, top_height], [side_width, side_notch], [side_width, 0]]);
+	polygon([[0,0], [0, top_height], [top_notch, top_height], [side_width_with_margins, side_notch], [side_width_with_margins, 0]]);
 }
 
 module topSideCurve() {
 	rotate_extrude($fn=100, angle=90)
-		polygon([[0,0], [0, top_height], [top_notch, top_height], [side_width, side_notch], [side_width, 0]]);
+		polygon([[0,0], [0, top_height], [top_notch, top_height], [side_width_with_margins, side_notch], [side_width_with_margins, 0]]);
 }
 
 // Sides

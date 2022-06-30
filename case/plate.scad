@@ -24,7 +24,7 @@ module center_plate() {
 
 		// Cutout for pcb components
 		translate([0, (plate_height+extra_pcb_height)/2])	// right ontop of plate
-			square([plate_width+pcb_offset*2, extra_pcb_height], center=true);
+			square([plate_width+(pcb_offset+margins)*2, extra_pcb_height], center=true);
 	}
 }
 
