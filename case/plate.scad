@@ -40,3 +40,12 @@ module drawPlate() {
 		center_plate();
 	}
 }
+
+module plate() {
+	difference() {
+		linear_extrude(plate_thickness)
+			drawPlate();
+
+		screws();
+	}
+}

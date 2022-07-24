@@ -11,11 +11,10 @@ include <plate.scad>
 include <side profile.scad>
 include <top.scad>
 include <bottom.scad>
+include <screw.scad>
 
-% linear_extrude(plate_thickness)
-	drawPlate();
+% plate();
 
-translate([0, 0, plate_thickness])
-	topSides();
+top();
 
 bottom();

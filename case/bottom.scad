@@ -38,8 +38,12 @@ module sideWall() {
 }
 
 module bottom() {
-	union() {
-		sideWall();
-		bottomCurve();
+	difference() { 
+		union() {
+			sideWall();
+			bottomCurve();
+		}
+
+		screws();
 	}
 }

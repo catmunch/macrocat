@@ -1,5 +1,5 @@
-top_notch = 2;
-side_notch = 2;
+top_notch  = 4;
+side_notch = 4;
 
 top_height = 8;
 
@@ -63,4 +63,13 @@ module topSides() {
 	translate([(total_plate_width)/2+keycap_margins, -(total_plate_height-extra_pcb_height)/2-keycap_margins])
 		rotate([0, 0, -90])
 		topSideCurve();
+}
+
+module top(){
+	difference(){
+		translate([0, 0, plate_thickness])
+			topSides();
+
+		inserts();
+	}
 }
