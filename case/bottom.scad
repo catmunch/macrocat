@@ -1,4 +1,4 @@
-bottom_thickness = 3;
+bottom_thickness = 4;
 fillet_width = 3;
 pcb_height = 4;	// 2mm for pcb, 2mm for hotswap/pins
 side_height = pcb_height+2*margins;

@@ -1,6 +1,6 @@
 screw_height      = 14;
 screw_clearance   = 3.4;					// 3.4mm clearance
-screw_head_height = 1;						// 1mm screw head height
+screw_head_height = 2;						// 1mm screw head height
 screw_head_width  = 6;						// 6mm screw head width
 
 inserts_width = 4.8;						// 5mm diameter
