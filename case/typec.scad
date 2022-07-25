@@ -8,5 +8,5 @@ module bottomCaseCutout() {
 
 module plateCutout() {
 		translate([0, plate_height/2+extra_pcb_height+side_width/2+margins+1, 0])
-        square([port_width, side_width+2], center=true);
+        square([port_width, side_width+2+margins*2], center=true);
 }
