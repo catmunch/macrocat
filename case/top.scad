@@ -1,27 +1,75 @@
-//
-// Top Case:
-//
+top_notch  = 4;
+side_notch = 4;
 
-// draws top case
-module top_draw_case() {
-	difference() {
-		// Create bottom shape
-		bottom_draw_plate();
+top_height = 8;
 
-		// Cut out space for keycaps
-		translate([side_thickness + side_clearance - keycap_clearance, side_thickness + side_clearance - keycap_clearance, 0])
-			square([plate_width + keycap_clearance*2, plate_length + keycap_clearance*2]);
-	}
+keycap_margins = 1.5*margins;
+
+side_width_with_margins = side_width + margins;
+
+// Draws the side profile
+module drawTopSideProfile() {
+	polygon([[0,0], [0, top_height], [top_notch, top_height], [side_width_with_margins, side_notch], [side_width_with_margins, 0]]);
 }
 
-// top case
-module top_case() {
-	difference() {
-		translate([0, 0, side_height + plate_thickness + bottom_thickness])
-		linear_extrude(top_thickness)
-			top_draw_case();
-
-		top_case_screws();
-	}
+module topSideCurve() {
+	rotate_extrude($fn=100, angle=90)
+		polygon([[0,0], [0, top_height], [top_notch, top_height], [side_width_with_margins, side_notch], [side_width_with_margins, 0]]);
 }
 
+// Sides
+module topSides() {
+	// Right
+	translate([(total_plate_width)/2+keycap_margins, (extra_pcb_height-keycap_margins)/2])
+		rotate([90, 0, 0])
+		linear_extrude(total_plate_height+keycap_margins, center=true)
+		drawTopSideProfile();
+
+	// Left
+	translate([-((total_plate_width)/2+keycap_margins), (extra_pcb_height-keycap_margins)/2])
+		rotate([90, 0, 180])
+		linear_extrude(total_plate_height+keycap_margins, center=true)
+		drawTopSideProfile();
+
+	// Top
+	translate([0, (total_plate_height+extra_pcb_height)/2])
+		rotate([90, 0, 90])
+		linear_extrude(total_plate_width+2*keycap_margins, center=true)
+		drawTopSideProfile();
+
+	// Bottom
+	translate([0, -(total_plate_height-extra_pcb_height)/2-keycap_margins])
+		rotate([90, 0, -90])
+		linear_extrude(total_plate_width+2*keycap_margins, center=true)
+		drawTopSideProfile();
+
+	// Edges
+	// Top Left
+	translate([-(total_plate_width)/2-keycap_margins, (total_plate_height+extra_pcb_height)/2])
+		rotate([0, 0, 90])
+		topSideCurve();
+
+	// Top Right
+	translate([(total_plate_width)/2+keycap_margins, (total_plate_height+extra_pcb_height)/2])
+		rotate([0, 0, 0])
+		topSideCurve();
+
+	// Bottom Left
+	translate([(-total_plate_width)/2-keycap_margins, -(total_plate_height-extra_pcb_height)/2-keycap_margins])
+		rotate([0, 0, 180])
+		topSideCurve();
+
+	// Bottom Right
+	translate([(total_plate_width)/2+keycap_margins, -(total_plate_height-extra_pcb_height)/2-keycap_margins])
+		rotate([0, 0, -90])
+		topSideCurve();
+}
+
+module top(){
+	difference(){
+		translate([0, 0, plate_thickness])
+			topSides();
+
+		inserts();
+	}
+}

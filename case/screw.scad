@@ -1,110 +1,84 @@
-// 
-// Screws:
-// 
+screw_height      = 14;
+screw_clearance   = 3.4;					// 3.4mm clearance
+screw_head_height = 2;						// 1mm screw head height
+screw_head_width  = 6;						// 6mm screw head width
 
-// Screw Holes
-module bottom_screws() {
-	union() {
-		// top
-		translate([2/3 * total_width, side_thickness/2, 0])
-			cylinder(screw_height, d=screw_clearance);
+inserts_width = 4.8;						// 5mm diameter
+inserts_height = 4;							// 4mm high insert
+inserts_hole_height = inserts_height*1.3;	// 4mm high insert
 
-		translate([1/3 * total_width, side_thickness/2, 0])
-			cylinder(screw_height, d=screw_clearance);
+inwards = 1.5;								// Move inwards
 
-		translate([2/3 * total_width, total_length - side_thickness/2, 0])
-			cylinder(screw_height, d=screw_clearance);
+total_bottom_height = bottom_thickness + side_height + plate_thickness;
 
-		translate([1/3 * total_width, total_length - side_thickness/2, 0])
-			cylinder(screw_height, d=screw_clearance);
-
-		translate([2/3 * total_width, side_thickness/2, -0.1])
-			cylinder(screw_head_height, d=screw_head_width);
-
-		translate([1/3 * total_width, side_thickness/2, -0.1])
-			cylinder(screw_head_height, d=screw_head_width);
-
-		translate([2/3 * total_width, total_length - side_thickness/2, -0.1])
-			cylinder(screw_head_height, d=screw_head_width);
-
-		translate([1/3 * total_width, total_length - side_thickness/2, -0.1])
-			cylinder(screw_head_height, d=screw_head_width);
-
-		// side
-		translate([side_thickness/2, 1/3 * total_length, 0])
-			cylinder(screw_height, d=screw_clearance);
-
-		translate([side_thickness/2, 2/3 * total_length, 0])
-			cylinder(screw_height, d=screw_clearance);
-
-		translate([total_width - side_thickness/2, 1/3 * total_length, 0])
-			cylinder(screw_height, d=screw_clearance);
-
-		translate([total_width - side_thickness/2, 2/3 * total_length, 0])
-			cylinder(screw_height, d=screw_clearance);
-
-		translate([side_thickness/2, 1/3 * total_length, -0.1])
-			cylinder(screw_head_height, d=screw_head_width);
-
-		translate([side_thickness/2, 2/3 * total_length, -0.1])
-			cylinder(screw_head_height, d=screw_head_width);
-
-		translate([total_width - side_thickness/2, 1/3 * total_length, -0.1])
-			cylinder(screw_head_height, d=screw_head_width);
-
-		translate([total_width - side_thickness/2, 2/3 * total_length, -0.1])
-			cylinder(screw_head_height, d=screw_head_width);
+module bottomScrew (x, y) {
+	translate([x, y+extra_pcb_height/2, -total_bottom_height + plate_thickness]) {	// +extra_pcb_height/2 to center to case
+		cylinder(total_bottom_height, d=screw_clearance);
+		cylinder(screw_head_height,   d=screw_head_width+margins);
 	}
 }
 
-module plate_screws() {
-    translate([2/3 * total_width, side_thickness/2])
-        circle(screw_clearance / 2);
-
-    translate([1/3 * total_width, side_thickness/2])
-        circle(screw_clearance / 2);
-
-    translate([2/3 * total_width, total_length - side_thickness/2])
-        circle(screw_clearance / 2);
-
-    translate([1/3 * total_width, total_length - side_thickness/2])
-        circle(screw_clearance / 2);
-    
-    translate([side_thickness/2, 1/3 * total_length])
-        circle(screw_clearance / 2);
-
-    translate([side_thickness/2, 2/3 * total_length])
-        circle(screw_clearance / 2);
-
-    translate([total_width - side_thickness/2, 1/3 * total_length])
-        circle(screw_clearance / 2);
-
-    translate([total_width - side_thickness/2, 2/3 * total_length])
-        circle(screw_clearance / 2);
+module plateScrew (x, y) {
+	translate([x, y+extra_pcb_height/2]) {
+		circle(d=screw_clearance);
+	}
 }
 
-module top_case_screws() {
-	translate([2/3 * total_width, side_thickness/2, bottom_thickness + side_height + plate_thickness-0.1])
+module topInserts (x, y) {
+	translate([x, y+extra_pcb_height/2, plate_thickness])	// +extra_pcb_height/2 to center to case
 		cylinder(inserts_hole_height, d=inserts_width);
+}
 
-	translate([1/3 * total_width, side_thickness/2, bottom_thickness + side_height + plate_thickness-0.1])
-		cylinder(inserts_hole_height, d=inserts_width);
+module screws() {
+	// Left
+	bottomScrew(-(total_plate_width+side_width)/2-(pcb_offset+margins-inwards), total_plate_height/3);
+	bottomScrew(-(total_plate_width+side_width)/2-(pcb_offset+margins-inwards), -total_plate_height/3);
 
-	translate([2/3 * total_width, total_length - side_thickness/2, bottom_thickness + side_height + plate_thickness-0.1])
-		cylinder(inserts_hole_height, d=inserts_width);
+	// Right
+	bottomScrew((total_plate_width+side_width)/2+(pcb_offset+margins-inwards), total_plate_height/3);
+	bottomScrew((total_plate_width+side_width)/2+(pcb_offset+margins-inwards), -total_plate_height/3);
 
-	translate([1/3 * total_width, total_length - side_thickness/2, bottom_thickness + side_height + plate_thickness-0.1])
-		cylinder(inserts_hole_height, d=inserts_width);
+	// Top
+	bottomScrew((total_plate_width+side_width)/4,  (total_plate_height+side_width)/2+margins-inwards);
+	bottomScrew(-(total_plate_width+side_width)/4, (total_plate_height+side_width)/2+margins-inwards);
 
-	translate([side_thickness/2, 1/3 * total_length, bottom_thickness + side_height + plate_thickness-0.1])
-		cylinder(inserts_hole_height, d=inserts_width);
+	// Bottom
+	bottomScrew((total_plate_width+side_width)/4,  -(total_plate_height+side_width)/2-2*margins+inwards);
+	bottomScrew(-(total_plate_width+side_width)/4, -(total_plate_height+side_width)/2-2*margins+inwards);
+}
 
-	translate([side_thickness/2, 2/3 * total_length, bottom_thickness + side_height + plate_thickness-0.1])
-		cylinder(inserts_hole_height, d=inserts_width);
+module inserts() {
+	// Left
+	topInserts(-(total_plate_width+side_width)/2-(pcb_offset+margins-inwards), total_plate_height/3);
+	topInserts(-(total_plate_width+side_width)/2-(pcb_offset+margins-inwards), -total_plate_height/3);
 
-	translate([total_width - side_thickness/2, 1/3 * total_length, bottom_thickness + side_height + plate_thickness-0.1])
-		cylinder(inserts_hole_height, d=inserts_width);
+	// Right
+	topInserts((total_plate_width+side_width)/2+(pcb_offset+margins-inwards), total_plate_height/3);
+	topInserts((total_plate_width+side_width)/2+(pcb_offset+margins-inwards), -total_plate_height/3);
 
-	translate([total_width - side_thickness/2, 2/3 * total_length, bottom_thickness + side_height + plate_thickness-0.1])
-		cylinder(inserts_hole_height, d=inserts_width);
+	// Top
+	topInserts((total_plate_width+side_width)/4,  (total_plate_height+side_width)/2+margins-inwards);
+	topInserts(-(total_plate_width+side_width)/4, (total_plate_height+side_width)/2+margins-inwards);
+
+	// Bottom
+	topInserts((total_plate_width+side_width)/4,  -(total_plate_height+side_width)/2-2*margins+inwards);
+	topInserts(-(total_plate_width+side_width)/4, -(total_plate_height+side_width)/2-2*margins+inwards);
+}
+
+module plateScrewHoles() {
+	// Left
+	plateScrew(-(total_plate_width+side_width)/2-(pcb_offset+margins-inwards), total_plate_height/3);
+	plateScrew(-(total_plate_width+side_width)/2-(pcb_offset+margins-inwards), -total_plate_height/3);
+
+	// Right
+	plateScrew((total_plate_width+side_width)/2+(pcb_offset+margins-inwards), total_plate_height/3);
+	plateScrew((total_plate_width+side_width)/2+(pcb_offset+margins-inwards), -total_plate_height/3);
+
+	// Top
+	plateScrew((total_plate_width+side_width)/4,  (total_plate_height+side_width)/2+margins-inwards);
+	plateScrew(-(total_plate_width+side_width)/4, (total_plate_height+side_width)/2+margins-inwards);
+
+	// Bottom
+	plateScrew((total_plate_width+side_width)/4,  -(total_plate_height+side_width)/2-2*margins+inwards);
+	plateScrew(-(total_plate_width+side_width)/4, -(total_plate_height+side_width)/2-2*margins+inwards);
 }
