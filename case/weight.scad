@@ -1,4 +1,4 @@
-weight_height = 1;
+weight_height = 2;
 thickness_offset = 0.3;
 total_scale_factor = 1.2;
 
