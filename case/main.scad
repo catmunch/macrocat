@@ -12,9 +12,10 @@ include <side profile.scad>
 include <top.scad>
 include <bottom.scad>
 include <screw.scad>
+include <typec.scad>
 
 % plate();
 
 top();
-
+ 
 bottom();

@@ -35,6 +35,9 @@ module drawPlate() {
 			
 			translate([0, (extra_pcb_height-pcb_offset)/2])
 				square([total_plate_width+2*pcb_offset, total_plate_height+pcb_offset], center=true);
+
+			plateScrewHoles();
+			plateCutout();
 		}
 
 		center_plate();

@@ -18,6 +18,12 @@ module bottomScrew (x, y) {
 	}
 }
 
+module plateScrew (x, y) {
+	translate([x, y+extra_pcb_height/2]) {
+		circle(d=screw_clearance);
+	}
+}
+
 module topInserts (x, y) {
 	translate([x, y+extra_pcb_height/2, plate_thickness])	// +extra_pcb_height/2 to center to case
 		cylinder(inserts_hole_height, d=inserts_width);
@@ -57,4 +63,22 @@ module inserts() {
 	// Bottom
 	topInserts((total_plate_width+side_width)/4,  -(total_plate_height+side_width)/2-2*margins+inwards);
 	topInserts(-(total_plate_width+side_width)/4, -(total_plate_height+side_width)/2-2*margins+inwards);
+}
+
+module plateScrewHoles() {
+	// Left
+	plateScrew(-(total_plate_width+side_width)/2-(pcb_offset+margins-inwards), total_plate_height/3);
+	plateScrew(-(total_plate_width+side_width)/2-(pcb_offset+margins-inwards), -total_plate_height/3);
+
+	// Right
+	plateScrew((total_plate_width+side_width)/2+(pcb_offset+margins-inwards), total_plate_height/3);
+	plateScrew((total_plate_width+side_width)/2+(pcb_offset+margins-inwards), -total_plate_height/3);
+
+	// Top
+	plateScrew((total_plate_width+side_width)/4,  (total_plate_height+side_width)/2+margins-inwards);
+	plateScrew(-(total_plate_width+side_width)/4, (total_plate_height+side_width)/2+margins-inwards);
+
+	// Bottom
+	plateScrew((total_plate_width+side_width)/4,  -(total_plate_height+side_width)/2-2*margins+inwards);
+	plateScrew(-(total_plate_width+side_width)/4, -(total_plate_height+side_width)/2-2*margins+inwards);
 }
