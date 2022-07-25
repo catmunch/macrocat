@@ -13,6 +13,7 @@ include <top.scad>
 include <bottom.scad>
 include <screw.scad>
 include <typec.scad>
+include <weight.scad>
 
 % plate();
 

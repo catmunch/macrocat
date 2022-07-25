@@ -46,5 +46,6 @@ module bottom() {
 
 		screws();
 		bottomCaseCutout();
+		cat();
 	}
 }
