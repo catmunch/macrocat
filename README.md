@@ -2,6 +2,8 @@
 
 A cat like macro keyboard/numpad.
 
+![macrocat](https://i.imgur.com/ItLHGBf.jpg)
+
 ## Resources
 - [Designer Spreadsheet](https://docs.google.com/spreadsheets/d/15iPMkPPelqXUuJzfWze6s_fHAjqMbbhKXIEQs6-oLG8/edit#gid=0)
 - [QMK Docs](https://docs.qmk.fm/#/)
